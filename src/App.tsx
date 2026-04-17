@@ -2,11 +2,13 @@ import { Suspense, useEffect } from 'react'
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Header, StepIndicator } from './components/layout'
+import { IntroScreen } from './components/intro'
 import { DocumentUpload } from './components/upload'
 import { ChunkingVisualizer } from './components/chunking'
 import { EmbeddingVisualizer } from './components/embeddings'
 import { RetrievalVisualizer } from './components/retrieval'
 import { GenerationVisualizer } from './components/generation'
+import { PartialRetrievalEpilogue } from './components/epilogue'
 import { LoadingSpinner } from './components/shared'
 import { useUIStore } from './store/uiStore'
 import { STEPS } from './types'
@@ -15,11 +17,13 @@ function StepContent() {
   const { currentStep } = useUIStore()
 
   const components = [
+    <IntroScreen key="intro" />,
     <DocumentUpload key="upload" />,
     <ChunkingVisualizer key="chunking" />,
     <EmbeddingVisualizer key="embedding" />,
     <RetrievalVisualizer key="retrieval" />,
     <GenerationVisualizer key="generation" />,
+    <PartialRetrievalEpilogue key="epilogue" />,
   ]
 
   return (

@@ -85,11 +85,13 @@ export type Step = {
 }
 
 export const STEPS: Step[] = [
-  { id: 0, key: 'upload', titleKey: 'steps.upload.title', descriptionKey: 'steps.upload.description' },
-  { id: 1, key: 'chunking', titleKey: 'steps.chunking.title', descriptionKey: 'steps.chunking.description' },
-  { id: 2, key: 'embedding', titleKey: 'steps.embedding.title', descriptionKey: 'steps.embedding.description' },
-  { id: 3, key: 'retrieval', titleKey: 'steps.retrieval.title', descriptionKey: 'steps.retrieval.description' },
-  { id: 4, key: 'generation', titleKey: 'steps.generation.title', descriptionKey: 'steps.generation.description' },
+  { id: 0, key: 'intro', titleKey: 'steps.intro.title', descriptionKey: 'steps.intro.description' },
+  { id: 1, key: 'upload', titleKey: 'steps.upload.title', descriptionKey: 'steps.upload.description' },
+  { id: 2, key: 'chunking', titleKey: 'steps.chunking.title', descriptionKey: 'steps.chunking.description' },
+  { id: 3, key: 'embedding', titleKey: 'steps.embedding.title', descriptionKey: 'steps.embedding.description' },
+  { id: 4, key: 'retrieval', titleKey: 'steps.retrieval.title', descriptionKey: 'steps.retrieval.description' },
+  { id: 5, key: 'generation', titleKey: 'steps.generation.title', descriptionKey: 'steps.generation.description' },
+  { id: 6, key: 'epilogue', titleKey: 'steps.epilogue.title', descriptionKey: 'steps.epilogue.description' },
 ]
 
 // Chunk colors for visualization (10 distinct colors)

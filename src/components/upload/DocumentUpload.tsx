@@ -164,7 +164,7 @@ export function DocumentUpload() {
         type: file.name.endsWith('.md') ? 'md' : file.name.endsWith('.pdf') ? 'pdf' : 'txt',
       }
       setDocument(doc)
-      setCurrentStep(1)
+      setCurrentStep(2)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to process file')
       console.error('File processing error:', err)
@@ -193,7 +193,7 @@ export function DocumentUpload() {
       type: 'txt',
     }
     setDocument(doc)
-    setCurrentStep(1)
+    setCurrentStep(2)
   }
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -446,7 +446,7 @@ export function DocumentUpload() {
               </p>
             </div>
             <button
-              onClick={() => setCurrentStep(1)}
+              onClick={() => setCurrentStep(2)}
               className="px-5 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 font-semibold shadow-sm"
             >
               {t('nav.next')}

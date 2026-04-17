@@ -146,7 +146,7 @@ export function EmbeddingVisualizer() {
     return (
       <div className="text-center py-12">
         <p className="text-gray-500">{t('errors.noChunks')}</p>
-        <button onClick={() => setCurrentStep(1)} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg">
+        <button onClick={() => setCurrentStep(2)} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg">
           {t('steps.chunking.title')}
         </button>
       </div>
@@ -328,7 +328,7 @@ export function EmbeddingVisualizer() {
         <motion.button
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          onClick={() => setCurrentStep(3)}
+          onClick={() => setCurrentStep(4)}
           className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transition-all"
         >
           {t('nav.next')}

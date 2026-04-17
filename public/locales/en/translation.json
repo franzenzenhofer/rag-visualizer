@@ -1,12 +1,12 @@
 {
   "app": {
     "title": "RAG Visualizer",
-    "subtitle": "See How AI Reads Your Documents",
-    "description": "Watch each step of Retrieval-Augmented Generation in action"
+    "subtitle": "Retrieval-Augmented Generation — and Partial Retrieval in modern AI",
+    "description": "Walk through the classic 5-step RAG pipeline, then see where it hides inside Claude, ChatGPT, Gemini and every agentic tool call today."
   },
   "intro": {
     "abbreviation": "Retrieval-Augmented Generation",
-    "definition": "An AI technique that enhances Large Language Models by retrieving relevant information from external knowledge bases before generating responses.",
+    "definition": "An AI technique that enhances Large Language Models by retrieving relevant information from external knowledge bases before generating responses. In 2026, almost every frontier model does this — often as hidden tool calls we call partial retrieval.",
     "createdBy": "Created By",
     "authors": "Patrick Lewis et al.",
     "organization": "Facebook AI Research (FAIR)",
@@ -24,6 +24,34 @@
     "benefitCurrent": "Access Current Information",
     "benefitSources": "Citable Sources",
     "benefitNoRetrain": "No Retraining Needed"
+  },
+  "introScreen": {
+    "badge": "Updated for 2026 · Partial Retrieval",
+    "heroLine1": "Every modern AI answer",
+    "heroLine2": "is built on this pipeline.",
+    "lede": "RAG — Retrieval-Augmented Generation — is the idea of letting a model look things up before it answers. What started as a 2020 research paper is now the invisible backbone of Claude, ChatGPT, Gemini, Perplexity and every agentic workflow you use. We call the modern form partial retrieval: small, on-demand lookups hidden inside tool calls.",
+    "visibleLabel": "Visible RAG — this tour",
+    "visibleTitle": "The classic 5-step pipeline",
+    "visibleBody": "You pick a document. You see it split into chunks, turned into vectors, searched by meaning, and stitched into a prompt. Nothing is hidden — you can inspect every step on your own machine.",
+    "hiddenLabel": "Partial Retrieval — real-world AI",
+    "hiddenTitle": "Tool-calls you rarely see",
+    "hiddenBody": "When Claude searches the web, reads a file, runs code, or recalls a memory, it is performing the same pipeline: embed a query, retrieve relevant context, then continue generating. The UI often shows only the final answer — not the retrieval that shaped it.",
+    "insightLabel": "Core insight",
+    "insightLine": "If you understand these 5 steps, you understand how today's AI gets its facts.",
+    "insightBody": "The model in front of you is not a database. It is a generator wrapped around a silent retrieval loop. The quality of any answer is largely the quality of what got retrieved — and whether the retrieval happened at all.",
+    "learnTitle": "What you'll do in the next 5 steps",
+    "step1Title": "Upload",
+    "step1Body": "Bring a document or pick a sample",
+    "step2Title": "Chunk",
+    "step2Body": "Split it into searchable pieces",
+    "step3Title": "Embed",
+    "step3Body": "Turn meaning into 384 numbers",
+    "step4Title": "Retrieve",
+    "step4Body": "Ask a question, find the best chunks",
+    "step5Title": "Assemble",
+    "step5Body": "Build the prompt the LLM would see",
+    "cta": "Start the tour",
+    "ctaNote": "Runs fully in your browser. Model (~30MB) downloads once on Step 3."
   },
   "nav": {
     "previous": "Previous",
@@ -61,8 +89,12 @@
     "noSearchResults": "No search results. Perform a search first."
   },
   "steps": {
+    "intro": {
+      "title": "Intro",
+      "description": "RAG in 2026 — and why you're already using it"
+    },
     "upload": {
-      "title": "1. Upload Document",
+      "title": "Upload",
       "description": "Start with any text document",
       "dropzone": "Drag & drop your document",
       "supported": "TXT, MD, PDF",
@@ -76,7 +108,7 @@
       "fileInfo": "{{name}} ({{size}})"
     },
     "chunking": {
-      "title": "2. Chunking",
+      "title": "Chunking",
       "description": "Breaking the document into pieces",
       "chunkSize": "Chunk Size",
       "overlap": "Overlap",
@@ -114,7 +146,7 @@
       }
     },
     "embedding": {
-      "title": "3. Embeddings",
+      "title": "Embeddings",
       "description": "Converting text to meaning-vectors",
       "loading": "Loading AI brain...",
       "loadingSize": "~30MB download (one-time)",
@@ -159,7 +191,7 @@
       }
     },
     "retrieval": {
-      "title": "4. Retrieval",
+      "title": "Retrieval",
       "description": "Finding the relevant chunks",
       "queryPlaceholder": "Type your question here...",
       "search": "Find Similar",
@@ -206,7 +238,7 @@
       }
     },
     "generation": {
-      "title": "5. Context Assembly",
+      "title": "Context Assembly",
       "description": "Building the final prompt",
       "status": {
         "adding": "Adding chunk {{current}}/{{total}} to prompt...",
@@ -244,7 +276,55 @@
         "bad": "\"I think the answer is...\"",
         "good": "With RAG: \"According to [Chunk 2]...\""
       }
+    },
+    "epilogue": {
+      "title": "Epilogue",
+      "description": "Partial Retrieval — the hidden RAG inside modern AI"
     }
+  },
+  "epilogue": {
+    "badge": "Partial Retrieval in the Wild",
+    "title": "Every frontier AI does this — usually without telling you.",
+    "lede": "You just stepped through the classic pipeline. Here is where the same five moves hide inside the products you use every day, often as tool calls you never see.",
+    "samePipelineLabel": "Same 5 steps, different wrapper",
+    "samePipelineBody": "Modern agents don't present retrieval as a separate stage. The model decides mid-answer when it needs more context, fires a tool call, receives partial context back, and continues. That is still RAG — just invisible, adaptive, and plural.",
+    "pipeline": {
+      "uploadShort": "Corpus",
+      "uploadHidden": "The web, your files, memory, docs",
+      "chunkShort": "Chunk",
+      "chunkHidden": "Done by the retrieval tool, not you",
+      "embedShort": "Embed",
+      "embedHidden": "Proprietary vector indexes",
+      "retrieveShort": "Retrieve",
+      "retrieveHidden": "Triggered by a tool call mid-answer",
+      "generateShort": "Generate",
+      "generateHidden": "Answer streamed with partial context"
+    },
+    "productsTitle": "Where you'll find partial retrieval",
+    "productsLede": "Transparency varies. Some products surface retrieval clearly; most surface only the answer.",
+    "products": {
+      "claude": "Claude's web_search, file_search, and code_execution tools each perform targeted retrieval. You see a tool-use indicator, but rarely the full set of chunks that actually landed in context.",
+      "chatgpt": "ChatGPT Search grounds answers on live web results. Projects and long-term memory inject older context via embeddings and summaries — often without a visible retrieval step.",
+      "gemini": "Gemini can ground responses on Google Search. The model decides when grounding happens; citations are surfaced, but the intermediate retrievals usually are not.",
+      "perplexity": "Perplexity shows its sources up front — the clearest example of visible, citation-first RAG as a product.",
+      "code": "Cursor, Claude Code, and similar IDE agents run retrieval over your codebase using grep, file reads, and embeddings. They typically show the files they touched but not the ranking that selected them.",
+      "agents": "Agent frameworks (tool-use, MCP, function calling) treat retrieval as just another tool. The model chooses when and what to fetch, so retrieval is partial, dynamic, and per-turn."
+    },
+    "transparency": {
+      "visible": "Visible",
+      "partial": "Partially visible",
+      "hidden": "Hidden"
+    },
+    "takeaway1Label": "Ask for sources",
+    "takeaway1Body": "If retrieval is partial, citations aren't optional. Push every factual claim back to a source the model actually retrieved.",
+    "takeaway2Label": "Assume invisible lookups",
+    "takeaway2Body": "Modern models retrieve silently. Good or bad answers often reflect what the retrieval tool saw — not the model's raw capability.",
+    "takeaway3Label": "Treat the prompt as a stage",
+    "takeaway3Body": "The final prompt is what the model actually reads. Everything else — memory, search, files — exists to shape that prompt.",
+    "closingTitle": "Knowing the pipeline makes you a better AI user.",
+    "closingBody": "You can now reason about why an answer is good or bad, when retrieval probably fired, what context it likely landed, and where a system is hiding its sources. That is the real superpower of understanding RAG in 2026.",
+    "restart": "Start over",
+    "paperLink": "Read the 2020 RAG paper"
   },
   "education": {
     "whatIsRAG": "What is RAG?",
