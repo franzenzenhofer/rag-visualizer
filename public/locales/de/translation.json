@@ -1,0 +1,264 @@
+{
+  "app": {
+    "title": "RAG Visualisierer",
+    "subtitle": "Sieh wie KI deine Dokumente liest",
+    "description": "Beobachte jeden Schritt von Retrieval-Augmented Generation live"
+  },
+  "intro": {
+    "abbreviation": "Retrieval-Augmented Generation",
+    "definition": "Eine KI-Technik, die Large Language Models verbessert, indem relevante Informationen aus externen Wissensbasen abgerufen werden, bevor Antworten generiert werden.",
+    "createdBy": "Entwickelt von",
+    "authors": "Patrick Lewis et al.",
+    "organization": "Facebook AI Research (FAIR)",
+    "published": "Veröffentlicht",
+    "publishDate": "Mai 2020",
+    "conference": "Präsentiert auf NeurIPS 2020",
+    "paper": "Originalpublikation",
+    "paperTitle": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    "howItWorks": "Wie RAG funktioniert",
+    "stepQuery": "Benutzeranfrage",
+    "stepRetrieve": "Kontext abrufen",
+    "stepGenerate": "Antwort generieren",
+    "explanation": "Im Gegensatz zu traditionellen LLMs, die nur auf Trainingsdaten zurückgreifen, holt RAG relevante Dokumente zur Anfragezeit — und ermöglicht so genaue, aktuelle und überprüfbare Antworten.",
+    "benefitHallucinations": "Reduziert Halluzinationen",
+    "benefitCurrent": "Zugriff auf aktuelle Informationen",
+    "benefitSources": "Zitierbare Quellen",
+    "benefitNoRetrain": "Kein Neutraining nötig"
+  },
+  "nav": {
+    "previous": "Zurück",
+    "next": "Weiter",
+    "reset": "Neu starten",
+    "replay": "Wiederholen",
+    "newSearch": "Neue Suche",
+    "retry": "Erneut versuchen",
+    "dismiss": "Schließen"
+  },
+  "common": {
+    "orUseYourOwn": "oder eigene Datei verwenden",
+    "processing": "Datei wird verarbeitet...",
+    "dropHere": "Datei hier ablegen",
+    "clickToBrowse": "oder klicken zum Durchsuchen",
+    "extractingText": "Text wird extrahiert",
+    "chars": "Zeichen",
+    "tokens": "Tokens",
+    "match": "Treffer",
+    "results": "Ergebnisse"
+  },
+  "privacy": {
+    "title": "Datenschutz & Transparenz",
+    "localProcessing": "Deine Dokumente bleiben auf deinem Gerät",
+    "modelDownload": "KI-Modell (~30MB) wird einmalig von HuggingFace heruntergeladen",
+    "pdfWorker": "PDF.js Worker wird vom CDN geladen",
+    "noTracking": "Keine Analysen oder Tracking"
+  },
+  "errors": {
+    "pdfExtractFailed": "Text konnte nicht aus PDF extrahiert werden. Das PDF könnte gescannt/bildbasiert sein.",
+    "fileProcessFailed": "Dateiverarbeitung fehlgeschlagen",
+    "noDocument": "Kein Dokument geladen.",
+    "noChunks": "Keine Chunks verfügbar. Gehe zurück und teile ein Dokument auf.",
+    "noEmbeddings": "Keine Embeddings verfügbar. Erstelle zuerst Embeddings.",
+    "noSearchResults": "Keine Suchergebnisse. Führe zuerst eine Suche durch."
+  },
+  "steps": {
+    "upload": {
+      "title": "1. Dokument hochladen",
+      "description": "Starte mit einem beliebigen Textdokument",
+      "dropzone": "Dokument hierher ziehen",
+      "supported": "TXT, MD, PDF",
+      "sampleDocs": "Wähle ein Beispieldokument um zu sehen wie es funktioniert",
+      "sample1": "Über KI",
+      "sample1Desc": "Lerne über künstliche Intelligenz, maschinelles Lernen und moderne KI-Anwendungen",
+      "sample2": "Über RAG",
+      "sample2Desc": "Verstehe Retrieval-Augmented Generation und seine Vorteile gegenüber traditionellen LLMs",
+      "sample3": "EU-Charta",
+      "sample3Desc": "Charta der Grundrechte - Würde, Freiheiten, Gleichheit und mehr",
+      "fileInfo": "{{name}} ({{size}})"
+    },
+    "chunking": {
+      "title": "2. Chunking",
+      "description": "Das Dokument in Stücke teilen",
+      "chunkSize": "Chunk-Größe",
+      "overlap": "Überlappung",
+      "settings": "Chunk-Einstellungen",
+      "status": {
+        "chunking": "Chunking... {{current}}/{{total}}",
+        "complete": "{{count}} Chunks erstellt",
+        "ready": "Bereit zum Chunken"
+      },
+      "originalDoc": "Originaldokument",
+      "readingDoc": "Dokument wird gelesen...",
+      "chunksLabel": "Chunks ({{current}}/{{total}})",
+      "chunkNumber": "Chunk {{number}}",
+      "chunkStats": "{{chars}} Zeichen",
+      "chunksWillAppear": "Chunks erscheinen hier...",
+      "learnMore": "Warum Dokumente aufteilen?",
+      "why": {
+        "title": "WARUM Chunken?",
+        "reason1": "LLMs haben begrenzten Kontext (können keine ganzen Bücher lesen)",
+        "reason2": "Alles zu senden ist langsam & teuer",
+        "reason3": "Chunking ermöglicht semantische Suche um relevante Teile zu finden"
+      },
+      "how": {
+        "title": "WIE Es Funktioniert",
+        "step1": "1. Am Dokumentanfang beginnen",
+        "step2": "2. ~{{size}} Tokens vorwärts lesen",
+        "step3": "3. An Satz-/Wortgrenze trennen",
+        "step4": "4. Chunk erstellen, weitergehen, wiederholen"
+      },
+      "whyOverlap": {
+        "title": "WARUM Überlappung?",
+        "reason": "Infos können Chunk-Grenzen überspannen!",
+        "bad": "\"Die Antwort ist\" | \"42\"",
+        "good": "Mit {{overlap}}% Überlappung → beide Chunks haben den vollen Satz"
+      }
+    },
+    "embedding": {
+      "title": "3. Embeddings",
+      "description": "Text in Bedeutungs-Vektoren umwandeln",
+      "loading": "KI-Gehirn wird geladen...",
+      "loadingSize": "~30MB Download (einmalig)",
+      "creating": "Embeddings werden erstellt...",
+      "creatingNote": "Das dauert einen Moment",
+      "status": {
+        "embedding": "Embedding Chunk {{current}}/{{total}}",
+        "complete": "{{count}} Embeddings erstellt",
+        "ready": "Bereit"
+      },
+      "textToNumbers": "Text → Zahlen",
+      "waitingForChunk": "Warte auf ersten Chunk...",
+      "chunkNumber": "Chunk {{number}}",
+      "vectorLabel": "→ 384-dimensionaler Vektor:",
+      "vectorExplain": "Diese 384 Zahlen erfassen die Bedeutung des Textes",
+      "converting": "Wird in Zahlen umgewandelt...",
+      "meaningSpace": "Bedeutungsraum ({{current}}/{{total}} Punkte)",
+      "pointsWillAppear": "Punkte erscheinen hier...",
+      "projectionNote": "Hinweis: Dies ist eine 2D-Projektion von 384D-Vektoren. Abstände approximieren, aber repräsentieren nicht perfekt die wahre Ähnlichkeit.",
+      "dimension1": "Semantische Dimension 1",
+      "dimension2": "Semantische Dimension 2",
+      "learnMore": "Was sind diese Vektoren?",
+      "what": {
+        "title": "WAS Sind Embeddings?",
+        "point1": "Text → 384 Zahlen (Vektor)",
+        "point2": "Zahlen erfassen Bedeutung",
+        "point3": "Wie GPS-Koordinaten für Konzepte!"
+      },
+      "howWork": {
+        "title": "WIE Sie Funktionieren",
+        "explain": "KI-Modell liest Text & gibt Zahlen aus:",
+        "king": "\"König\" → [0.2, -0.5, 0.8, ...]",
+        "queen": "\"Königin\" → [0.2, -0.4, 0.7, ...]",
+        "similar": "Ähnlich!"
+      },
+      "whyMatter": {
+        "title": "WARUM Sie Wichtig Sind",
+        "point1": "Ermöglichen semantische Suche",
+        "point2": "Finden Bedeutung, nicht nur Schlüsselwörter",
+        "point3": "\"glücklich\" findet \"freudig\" & \"fröhlich\"",
+        "point4": "Ermöglicht den nächsten Retrieval-Schritt!"
+      }
+    },
+    "retrieval": {
+      "title": "4. Retrieval",
+      "description": "Die relevanten Chunks finden",
+      "queryPlaceholder": "Gib hier deine Frage ein...",
+      "search": "Ähnliche Finden",
+      "status": {
+        "converting": "Frage wird in Vektor umgewandelt...",
+        "finding": "Nächste Treffer werden gesucht...",
+        "found": "{{count}} Treffer gefunden",
+        "ask": "Stelle eine Frage zum Suchen"
+      },
+      "meaningSpace": "Bedeutungsraum",
+      "matchesFound": "{{count}} Treffer gefunden",
+      "searching": "suche...",
+      "projectionNote": "2D-Projektion von 384D-Vektoren. Abfragepunkt (Q) wird nahe seiner besten Treffer platziert.",
+      "retrievedChunks": "Abgerufene Chunks",
+      "willAnswerQuestion": "Diese werden verwendet um deine Frage zu beantworten",
+      "matchNumber": "#{{number}} Treffer",
+      "enterQuestion": "Gib eine Frage ein um zu suchen",
+      "yourQuestion": "Deine Frage",
+      "convertingQuestion": "Frage wird in Vektor umgewandelt...",
+      "questionVector": "→ Frage-Vektor (384 Zahlen):",
+      "comparingVectors": "Vergleiche mit allen Chunk-Vektoren...",
+      "foundMatches": "Nächste Treffer gefunden!",
+      "learnMore": "Wie funktioniert das Finden?",
+      "what": {
+        "title": "WAS Passiert Hier?",
+        "step1": "1. Deine Frage → Vektor",
+        "step2": "2. Mit allen Chunk-Vektoren vergleichen",
+        "step3": "3. Nächste Treffer finden",
+        "step4": "4. Top {{k}} Ergebnisse zurückgeben"
+      },
+      "cosine": {
+        "title": "Kosinus-Ähnlichkeit",
+        "explain": "Misst Winkel zwischen Vektoren:",
+        "identical": "100% = identische Bedeutung",
+        "relevant": "90%+ = sehr relevant",
+        "related": "70%+ = etwas verwandt"
+      },
+      "whySmart": {
+        "title": "WARUM Es Intelligent Ist",
+        "point1": "Findet Bedeutung, nicht nur Schlüsselwörter",
+        "point2": "\"Auto\" findet \"Fahrzeug\"",
+        "point3": "\"glücklich\" findet \"freudig\"",
+        "point4": "Funktioniert über Synonyme hinweg!"
+      }
+    },
+    "generation": {
+      "title": "5. Kontext-Aufbau",
+      "description": "Den finalen Prompt zusammensetzen",
+      "status": {
+        "adding": "Chunk {{current}}/{{total}} wird zum Prompt hinzugefügt...",
+        "complete": "Prompt zusammengestellt!",
+        "building": "Prompt wird erstellt..."
+      },
+      "copyPrompt": "Prompt Kopieren",
+      "copied": "Kopiert!",
+      "retrievedChunks": "Abgerufene Chunks ({{current}}/{{total}})",
+      "chunkNumber": "Chunk {{number}}",
+      "matchPercent": "{{percent}}% Treffer",
+      "finalPrompt": "Finaler Prompt (farbcodiert)",
+      "complete": "RAG-Pipeline Abgeschlossen!",
+      "completeNote": "Dieser Prompt kann an jedes LLM gesendet werden. Die Farben zeigen genau welche Chunks die Antwort informieren.",
+      "promptInstructions": "Verwende den folgenden Kontext um die Frage zu beantworten. Verwende nur Informationen aus dem bereitgestellten Kontext.",
+      "contextLabel": "KONTEXT:",
+      "questionLabel": "FRAGE:",
+      "answerLabel": "ANTWORT:",
+      "learnMore": "Warum funktioniert das?",
+      "what": {
+        "title": "WAS Ist Kontext-Aufbau?",
+        "point1": "Abgerufene Chunks + deine Frage kombinieren",
+        "point2": "Einen strukturierten Prompt für das LLM erstellen",
+        "point3": "Das LLM sieht nur was in diesem Prompt steht!"
+      },
+      "whyMatters": {
+        "title": "WARUM Es Wichtig Ist",
+        "point1": "LLM antwortet nur aus dem bereitgestellten Kontext",
+        "point2": "Reduziert Halluzinationen (Erfindungen)",
+        "point3": "Ermöglicht Zitate & verifizierbare Antworten"
+      },
+      "magic": {
+        "title": "Die RAG-Magie",
+        "without": "Ohne RAG: LLM rät aus Training",
+        "bad": "\"Ich denke die Antwort ist...\"",
+        "good": "Mit RAG: \"Laut [Chunk 2]...\""
+      }
+    }
+  },
+  "education": {
+    "whatIsRAG": "Was ist RAG?",
+    "ragExplanation": "RAG (Retrieval-Augmented Generation) ist wie einer KI vor einer Prüfung ein Lehrbuch zu geben. Anstatt aus dem Gedächtnis zu raten, kann die KI die Antwort in DEINEN Dokumenten nachschlagen. Das macht Antworten genau, überprüfbar und faktenbasiert.",
+    "pipeline": "Die 5-Schritte RAG-Pipeline",
+    "step1": "1. HOCHLADEN: Dein Dokument wird zum Referenzmaterial der KI",
+    "step2": "2. CHUNKEN: In suchbare Stücke aufteilen (zu groß = langsam, zu klein = verliert Kontext)",
+    "step3": "3. EINBETTEN: In Bedeutungs-Vektoren umwandeln (ähnliche Bedeutungen = ähnliche Zahlen)",
+    "step4": "4. ABRUFEN: Die Chunks finden die deiner Frage am nächsten sind",
+    "step5": "5. GENERIEREN: KI antwortet NUR mit dem relevanten Kontext"
+  },
+  "footer": {
+    "learnMore": "Mehr über RAG erfahren",
+    "github": "Auf GitHub ansehen",
+    "builtWith": "Erstellt mit React, Transformers.js und Visx"
+  }
+}

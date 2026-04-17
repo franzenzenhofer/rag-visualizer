@@ -1,0 +1,264 @@
+{
+  "app": {
+    "title": "RAG Visualizer",
+    "subtitle": "See How AI Reads Your Documents",
+    "description": "Watch each step of Retrieval-Augmented Generation in action"
+  },
+  "intro": {
+    "abbreviation": "Retrieval-Augmented Generation",
+    "definition": "An AI technique that enhances Large Language Models by retrieving relevant information from external knowledge bases before generating responses.",
+    "createdBy": "Created By",
+    "authors": "Patrick Lewis et al.",
+    "organization": "Facebook AI Research (FAIR)",
+    "published": "Published",
+    "publishDate": "May 2020",
+    "conference": "Presented at NeurIPS 2020",
+    "paper": "Original Paper",
+    "paperTitle": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    "howItWorks": "How RAG Works",
+    "stepQuery": "User Query",
+    "stepRetrieve": "Retrieve Context",
+    "stepGenerate": "Generate Answer",
+    "explanation": "Unlike traditional LLMs that rely only on training data, RAG fetches relevant documents at query time — enabling accurate, up-to-date, and verifiable responses.",
+    "benefitHallucinations": "Reduces Hallucinations",
+    "benefitCurrent": "Access Current Information",
+    "benefitSources": "Citable Sources",
+    "benefitNoRetrain": "No Retraining Needed"
+  },
+  "nav": {
+    "previous": "Previous",
+    "next": "Next",
+    "reset": "Start Over",
+    "replay": "Replay",
+    "newSearch": "New Search",
+    "retry": "Retry",
+    "dismiss": "Dismiss"
+  },
+  "common": {
+    "orUseYourOwn": "or use your own",
+    "processing": "Processing file...",
+    "dropHere": "Drop your file here",
+    "clickToBrowse": "or click to browse",
+    "extractingText": "Extracting text content",
+    "chars": "chars",
+    "tokens": "tokens",
+    "match": "Match",
+    "results": "Results"
+  },
+  "privacy": {
+    "title": "Privacy & Transparency",
+    "localProcessing": "Your documents stay on your device",
+    "modelDownload": "AI model (~30MB) downloaded once from HuggingFace",
+    "pdfWorker": "PDF.js worker loaded from CDN",
+    "noTracking": "No analytics or tracking"
+  },
+  "errors": {
+    "pdfExtractFailed": "Could not extract text from PDF. The PDF might be scanned/image-based.",
+    "fileProcessFailed": "Failed to process file",
+    "noDocument": "No document loaded.",
+    "noChunks": "No chunks available. Go back and chunk a document.",
+    "noEmbeddings": "No embeddings available. Create embeddings first.",
+    "noSearchResults": "No search results. Perform a search first."
+  },
+  "steps": {
+    "upload": {
+      "title": "1. Upload Document",
+      "description": "Start with any text document",
+      "dropzone": "Drag & drop your document",
+      "supported": "TXT, MD, PDF",
+      "sampleDocs": "Pick a sample document to see how it works",
+      "sample1": "About AI",
+      "sample1Desc": "Learn about artificial intelligence, machine learning, and modern AI applications",
+      "sample2": "About RAG",
+      "sample2Desc": "Understand retrieval-augmented generation and its advantages over traditional LLMs",
+      "sample3": "EU Charter",
+      "sample3Desc": "Charter of Fundamental Rights - dignity, freedoms, equality, and more",
+      "fileInfo": "{{name}} ({{size}})"
+    },
+    "chunking": {
+      "title": "2. Chunking",
+      "description": "Breaking the document into pieces",
+      "chunkSize": "Chunk Size",
+      "overlap": "Overlap",
+      "settings": "Chunk settings",
+      "status": {
+        "chunking": "Chunking... {{current}}/{{total}}",
+        "complete": "{{count}} chunks created",
+        "ready": "Ready to chunk"
+      },
+      "originalDoc": "Original Document",
+      "readingDoc": "Reading document...",
+      "chunksLabel": "Chunks ({{current}}/{{total}})",
+      "chunkNumber": "Chunk {{number}}",
+      "chunkStats": "{{chars}} chars",
+      "chunksWillAppear": "Chunks will appear here...",
+      "learnMore": "Why split documents?",
+      "why": {
+        "title": "WHY Chunk?",
+        "reason1": "LLMs have limited context (can't read entire books)",
+        "reason2": "Sending everything is slow & expensive",
+        "reason3": "Chunking enables semantic search to find relevant parts"
+      },
+      "how": {
+        "title": "HOW It Works",
+        "step1": "1. Start at document beginning",
+        "step2": "2. Read ~{{size}} tokens forward",
+        "step3": "3. Break at sentence/word boundary",
+        "step4": "4. Create chunk, step forward, repeat"
+      },
+      "whyOverlap": {
+        "title": "WHY Overlap?",
+        "reason": "Info can span chunk boundaries!",
+        "bad": "\"The answer is\" | \"42\"",
+        "good": "With {{overlap}}% overlap → both chunks have full sentence"
+      }
+    },
+    "embedding": {
+      "title": "3. Embeddings",
+      "description": "Converting text to meaning-vectors",
+      "loading": "Loading AI brain...",
+      "loadingSize": "~30MB download (one-time)",
+      "creating": "Creating embeddings...",
+      "creatingNote": "This takes a moment",
+      "status": {
+        "embedding": "Embedding chunk {{current}}/{{total}}",
+        "complete": "{{count}} embeddings created",
+        "ready": "Ready"
+      },
+      "textToNumbers": "Text → Numbers",
+      "waitingForChunk": "Waiting for first chunk...",
+      "chunkNumber": "Chunk {{number}}",
+      "vectorLabel": "→ 384-dimensional vector:",
+      "vectorExplain": "These 384 numbers capture the meaning of the text",
+      "converting": "Converting to numbers...",
+      "meaningSpace": "Meaning Space ({{current}}/{{total}} points)",
+      "pointsWillAppear": "Points will appear here...",
+      "projectionNote": "Note: This is a 2D projection of 384D vectors. Distances approximate but don't perfectly represent true similarity.",
+      "dimension1": "Semantic Dimension 1",
+      "dimension2": "Semantic Dimension 2",
+      "learnMore": "What are these vectors?",
+      "what": {
+        "title": "WHAT Are Embeddings?",
+        "point1": "Text → 384 numbers (vector)",
+        "point2": "Numbers capture meaning",
+        "point3": "Like GPS coordinates for concepts!"
+      },
+      "howWork": {
+        "title": "HOW They Work",
+        "explain": "AI model reads text & outputs numbers:",
+        "king": "\"King\" → [0.2, -0.5, 0.8, ...]",
+        "queen": "\"Queen\" → [0.2, -0.4, 0.7, ...]",
+        "similar": "Similar!"
+      },
+      "whyMatter": {
+        "title": "WHY They Matter",
+        "point1": "Enable semantic search",
+        "point2": "Find meaning, not just keywords",
+        "point3": "\"happy\" finds \"joyful\" & \"cheerful\"",
+        "point4": "Powers the next retrieval step!"
+      }
+    },
+    "retrieval": {
+      "title": "4. Retrieval",
+      "description": "Finding the relevant chunks",
+      "queryPlaceholder": "Type your question here...",
+      "search": "Find Similar",
+      "status": {
+        "converting": "Converting question to vector...",
+        "finding": "Finding closest matches...",
+        "found": "Found {{count}} matches",
+        "ask": "Ask a question to search"
+      },
+      "meaningSpace": "Meaning Space",
+      "matchesFound": "{{count}} matches found",
+      "searching": "searching...",
+      "projectionNote": "2D projection of 384D vectors. Query point (Q) is placed near its best matches.",
+      "retrievedChunks": "Retrieved Chunks",
+      "willAnswerQuestion": "These will be used to answer your question",
+      "matchNumber": "#{{number}} Match",
+      "enterQuestion": "Enter a question to search",
+      "yourQuestion": "Your Question",
+      "convertingQuestion": "Converting question to vector...",
+      "questionVector": "→ Question Vector (384 numbers):",
+      "comparingVectors": "Comparing with all chunk vectors...",
+      "foundMatches": "Found the closest matches!",
+      "learnMore": "How does finding work?",
+      "what": {
+        "title": "WHAT Happens Here?",
+        "step1": "1. Your question → vector",
+        "step2": "2. Compare to all chunk vectors",
+        "step3": "3. Find closest matches",
+        "step4": "4. Return top {{k}} results"
+      },
+      "cosine": {
+        "title": "Cosine Similarity",
+        "explain": "Measures angle between vectors:",
+        "identical": "100% = identical meaning",
+        "relevant": "90%+ = very relevant",
+        "related": "70%+ = somewhat related"
+      },
+      "whySmart": {
+        "title": "WHY It's Smart",
+        "point1": "Finds meaning, not just keywords",
+        "point2": "\"car\" matches \"automobile\"",
+        "point3": "\"happy\" matches \"joyful\"",
+        "point4": "Works across synonyms!"
+      }
+    },
+    "generation": {
+      "title": "5. Context Assembly",
+      "description": "Building the final prompt",
+      "status": {
+        "adding": "Adding chunk {{current}}/{{total}} to prompt...",
+        "complete": "Prompt assembled!",
+        "building": "Building prompt..."
+      },
+      "copyPrompt": "Copy Prompt",
+      "copied": "Copied!",
+      "retrievedChunks": "Retrieved Chunks ({{current}}/{{total}})",
+      "chunkNumber": "Chunk {{number}}",
+      "matchPercent": "{{percent}}% match",
+      "finalPrompt": "Final Prompt (color-coded)",
+      "complete": "RAG Pipeline Complete!",
+      "completeNote": "This prompt can be sent to any LLM. The colors show exactly which chunks will inform the answer.",
+      "promptInstructions": "Use the following context to answer the question. Only use information from the context provided.",
+      "contextLabel": "CONTEXT:",
+      "questionLabel": "QUESTION:",
+      "answerLabel": "ANSWER:",
+      "learnMore": "Why does this work?",
+      "what": {
+        "title": "WHAT Is Context Assembly?",
+        "point1": "Combining retrieved chunks + your question",
+        "point2": "Creating a structured prompt for the LLM",
+        "point3": "The LLM only sees what's in this prompt!"
+      },
+      "whyMatters": {
+        "title": "WHY It Matters",
+        "point1": "LLM answers only from context you provide",
+        "point2": "Reduces hallucination (making things up)",
+        "point3": "Enables citations & verifiable answers"
+      },
+      "magic": {
+        "title": "The RAG Magic",
+        "without": "Without RAG: LLM guesses from training",
+        "bad": "\"I think the answer is...\"",
+        "good": "With RAG: \"According to [Chunk 2]...\""
+      }
+    }
+  },
+  "education": {
+    "whatIsRAG": "What is RAG?",
+    "ragExplanation": "RAG (Retrieval-Augmented Generation) is like giving an AI a textbook before an exam. Instead of guessing from memory, the AI can look up the answer in YOUR documents. This makes responses accurate, verifiable, and grounded in facts.",
+    "pipeline": "The 5-Step RAG Pipeline",
+    "step1": "1. UPLOAD: Your document becomes the AI's reference material",
+    "step2": "2. CHUNK: Split into searchable pieces (too big = slow, too small = loses context)",
+    "step3": "3. EMBED: Convert to meaning-vectors (similar meanings = similar numbers)",
+    "step4": "4. RETRIEVE: Find the chunks closest to your question",
+    "step5": "5. GENERATE: AI answers using ONLY the relevant context"
+  },
+  "footer": {
+    "learnMore": "Learn more about RAG",
+    "github": "View on GitHub",
+    "builtWith": "Built with React, Transformers.js, and Visx"
+  }
+}
