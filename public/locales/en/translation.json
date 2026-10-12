@@ -116,7 +116,11 @@
       "status": {
         "chunking": "Chunking... {{current}}/{{total}}",
         "complete": "{{count}} chunks created",
-        "ready": "Ready to chunk"
+        "ready": "Ready to chunk",
+        "reading": "Reading the document...",
+        "scanning": "Chunk {{current}}/{{total}}: selecting ~{{tokens}} tokens...",
+        "cutting": "Chunk {{current}}/{{total}}: cut here",
+        "moving": "Chunk {{current}}/{{total}}: moving into the chunk list"
       },
       "originalDoc": "Original Document",
       "readingDoc": "Reading document...",
@@ -143,7 +147,8 @@
         "reason": "Info can span chunk boundaries!",
         "bad": "\"The answer is\" | \"42\"",
         "good": "With {{overlap}}% overlap → both chunks have full sentence"
-      }
+      },
+      "skip": "Skip animation"
     },
     "embedding": {
       "title": "Embeddings",

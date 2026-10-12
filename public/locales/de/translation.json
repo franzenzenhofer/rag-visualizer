@@ -116,7 +116,11 @@
       "status": {
         "chunking": "Chunking... {{current}}/{{total}}",
         "complete": "{{count}} Chunks erstellt",
-        "ready": "Bereit zum Chunken"
+        "ready": "Bereit zum Chunken",
+        "reading": "Dokument wird gelesen...",
+        "scanning": "Chunk {{current}}/{{total}}: ~{{tokens}} Tokens werden markiert...",
+        "cutting": "Chunk {{current}}/{{total}}: hier wird geschnitten",
+        "moving": "Chunk {{current}}/{{total}}: wandert in die Chunk-Liste"
       },
       "originalDoc": "Originaldokument",
       "readingDoc": "Dokument wird gelesen...",
@@ -143,7 +147,8 @@
         "reason": "Infos können Chunk-Grenzen überspannen!",
         "bad": "\"Die Antwort ist\" | \"42\"",
         "good": "Mit {{overlap}}% Überlappung → beide Chunks haben den vollen Satz"
-      }
+      },
+      "skip": "Animation überspringen"
     },
     "embedding": {
       "title": "Embeddings",
