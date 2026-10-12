@@ -2,23 +2,22 @@ import { describe, expect, it } from 'vitest'
 import { easeInOut, phaseDurations, snapToWordEnd } from './chunkingTimeline'
 
 describe('phaseDurations', () => {
-  it('plays the first chunk slowest and speeds up afterwards', () => {
-    const first = phaseDurations(0, false)
-    const second = phaseDurations(1, false)
-    expect(second.scan).toBeLessThan(first.scan)
-    expect(second.fly).toBeLessThan(first.fly)
+  it('plays the first two chunks at full length', () => {
+    expect(phaseDurations(1, false)).toEqual(phaseDurations(0, false))
+    expect(phaseDurations(0, false).window).toBeGreaterThanOrEqual(3000)
   })
 
-  it('never drops below the speed floor, so late chunks stay visible', () => {
-    const late = phaseDurations(50, false)
-    expect(late).toEqual(phaseDurations(20, false))
-    expect(late.fly).toBeGreaterThanOrEqual(250)
+  it('speeds up later chunks gently and never below the floor', () => {
+    expect(phaseDurations(2, false).window).toBeLessThan(phaseDurations(1, false).window)
+    expect(phaseDurations(50, false)).toEqual(phaseDurations(30, false))
+    expect(phaseDurations(50, false).flying).toBeGreaterThanOrEqual(800)
   })
 
-  it('skips sweep and flight for reduced motion', () => {
+  it('skips sweeps and flights for reduced motion but keeps the explaining holds', () => {
     const reduced = phaseDurations(0, true)
-    expect(reduced.scan).toBe(0)
-    expect(reduced.fly).toBe(0)
+    expect(reduced.window).toBe(0)
+    expect(reduced.flying).toBe(0)
+    expect(reduced.cutting).toBeGreaterThan(0)
   })
 })
 

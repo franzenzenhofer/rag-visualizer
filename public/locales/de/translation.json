@@ -116,11 +116,7 @@
       "status": {
         "chunking": "Chunking... {{current}}/{{total}}",
         "complete": "{{count}} Chunks erstellt",
-        "ready": "Bereit zum Chunken",
-        "reading": "Dokument wird gelesen...",
-        "scanning": "Chunk {{current}}/{{total}}: ~{{tokens}} Tokens werden markiert...",
-        "cutting": "Chunk {{current}}/{{total}}: hier wird geschnitten",
-        "moving": "Chunk {{current}}/{{total}}: wandert in die Chunk-Liste"
+        "ready": "Bereit zum Chunken"
       },
       "originalDoc": "Originaldokument",
       "readingDoc": "Dokument wird gelesen...",
@@ -148,7 +144,31 @@
         "bad": "\"Die Antwort ist\" | \"42\"",
         "good": "Mit {{overlap}}% Überlappung → beide Chunks haben den vollen Satz"
       },
-      "skip": "Animation überspringen"
+      "skip": "Animation überspringen",
+      "anim": {
+        "reading": "Das ist das ganze Dokument. Es ist zu lang, um es einer KI in einem Stück zu geben, also schneiden wir es in Chunks.",
+        "window": "Nimm die nächsten {{tokens}} Tokens Text.",
+        "snap": "Schiebe den Schnitt zurück an das letzte Satzende, damit kein Satz zerrissen wird.",
+        "cutting": "Schnitt! Chunk {{number}} ist ~{{tokens}} Tokens lang.",
+        "flying": "Speichere ihn als Chunk {{number}}.",
+        "overlap": "Weiter, aber {{overlap}}% zurück im letzten Chunk beginnen. Der gestreifte Text gehört zu beiden Chunks, so geht am Schnitt keine Bedeutung verloren.",
+        "done": "Fertig: Das Dokument besteht jetzt aus {{count}} Chunks. Als Nächstes wird jeder Chunk zu einem Vektor.",
+        "counter": "{{count}} / {{total}} Tokens",
+        "chunkOf": "Chunk {{current}} von {{total}}",
+        "pause": "Pause",
+        "play": "Weiter",
+        "nextStep": "Nächster Schritt",
+        "speed": "Tempo",
+        "replay": "Nochmal",
+        "strip": {
+          "window": "{{tokens}} Tokens nehmen",
+          "snap": "Zurück ans Satzende",
+          "cutting": "Schneiden",
+          "flying": "Als Chunk speichern",
+          "overlap": "Weiter mit Überlappung"
+        },
+        "overlapBadge": "in beiden Chunks"
+      }
     },
     "embedding": {
       "title": "Embeddings",

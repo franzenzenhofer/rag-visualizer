@@ -38,7 +38,7 @@ function estimateTokens(text: string): number {
   return Math.ceil(text.length / 4)
 }
 
-function estimateCharacters(tokens: number): number {
+export function estimateCharacters(tokens: number): number {
   return tokens * 4
 }
 

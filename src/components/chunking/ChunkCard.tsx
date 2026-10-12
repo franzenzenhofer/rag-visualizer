@@ -1,23 +1,20 @@
 import { useTranslation } from 'react-i18next'
 import type { Chunk } from '../../types'
 
-// Long chunks are shortened in the list, the full text lives in the document
-const PREVIEW_CHARS = 300
-
 export function ChunkCard({ chunk, number }: { chunk: Chunk; number: number }) {
   const { t } = useTranslation()
-  const preview = chunk.text.length > PREVIEW_CHARS ? chunk.text.slice(0, PREVIEW_CHARS) + '...' : chunk.text
 
   return (
-    <div className="h-full rounded-lg overflow-hidden bg-white dark:bg-gray-900" style={{ border: `2px solid ${chunk.color}` }}>
-      <div className="px-3 py-1.5 flex items-center justify-between gap-2" style={{ backgroundColor: chunk.color }}>
-        <span className="text-white font-bold text-base">{t('steps.chunking.chunkNumber', { number })}</span>
-        <span className="text-white/90 text-base">
-          {t('steps.chunking.chunkStats', { chars: chunk.text.length })} · ~{chunk.tokenCount} tokens
-        </span>
-      </div>
-      <div className="p-3 font-mono text-base leading-relaxed text-gray-700 dark:text-gray-300 line-clamp-4">
-        {preview}
+    <div className="h-full flex rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-gray-200">
+      <div className="w-2 shrink-0" style={{ backgroundColor: chunk.color }} />
+      <div className="flex-1 min-w-0 px-4 py-3">
+        <div className="flex items-center justify-between gap-2 mb-1">
+          <span className="font-bold text-base" style={{ color: chunk.color }}>
+            {t('steps.chunking.chunkNumber', { number })}
+          </span>
+          <span className="text-base text-gray-500 tabular-nums">~{chunk.tokenCount} tokens</span>
+        </div>
+        <p className="font-serif text-base leading-7 text-gray-700 line-clamp-3">{chunk.text}</p>
       </div>
     </div>
   )

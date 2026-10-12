@@ -116,11 +116,7 @@
       "status": {
         "chunking": "Chunking... {{current}}/{{total}}",
         "complete": "{{count}} chunks created",
-        "ready": "Ready to chunk",
-        "reading": "Reading the document...",
-        "scanning": "Chunk {{current}}/{{total}}: selecting ~{{tokens}} tokens...",
-        "cutting": "Chunk {{current}}/{{total}}: cut here",
-        "moving": "Chunk {{current}}/{{total}}: moving into the chunk list"
+        "ready": "Ready to chunk"
       },
       "originalDoc": "Original Document",
       "readingDoc": "Reading document...",
@@ -148,7 +144,31 @@
         "bad": "\"The answer is\" | \"42\"",
         "good": "With {{overlap}}% overlap → both chunks have full sentence"
       },
-      "skip": "Skip animation"
+      "skip": "Skip animation",
+      "anim": {
+        "reading": "This is the whole document. It is too long to hand to an AI in one piece, so we cut it into chunks.",
+        "window": "Take the next {{tokens}} tokens of text.",
+        "snap": "Move the cut back to the last sentence end, so no sentence is torn apart.",
+        "cutting": "Cut! Chunk {{number}} is ~{{tokens}} tokens long.",
+        "flying": "Store it as Chunk {{number}}.",
+        "overlap": "Step forward, but start {{overlap}}% back inside the last chunk. The striped text belongs to both chunks, so no meaning is lost at the cut.",
+        "done": "Done: the document is now {{count}} chunks. Next, every chunk becomes a vector.",
+        "counter": "{{count}} / {{total}} tokens",
+        "chunkOf": "Chunk {{current}} of {{total}}",
+        "pause": "Pause",
+        "play": "Play",
+        "nextStep": "Next step",
+        "speed": "Speed",
+        "replay": "Replay",
+        "strip": {
+          "window": "Take {{tokens}} tokens",
+          "snap": "Back to sentence end",
+          "cutting": "Cut",
+          "flying": "Store as chunk",
+          "overlap": "Step forward with overlap"
+        },
+        "overlapBadge": "in both chunks"
+      }
     },
     "embedding": {
       "title": "Embeddings",
