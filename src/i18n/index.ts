@@ -17,7 +17,8 @@ i18n
     },
 
     backend: {
-      loadPath: `${import.meta.env.BASE_URL}locales/{{lng}}/translation.json`,
+      // Versioned per build: during a deploy, new code must never pair with old texts
+      loadPath: `${import.meta.env.BASE_URL}locales/{{lng}}/translation.json?v=${import.meta.env.VITE_BUILD_ID}`,
     },
 
     detection: {

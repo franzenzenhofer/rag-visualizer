@@ -6,6 +6,10 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   base: '/',
+  // Unique per build: versions the translation files, so new code never loads old texts
+  define: {
+    'import.meta.env.VITE_BUILD_ID': JSON.stringify(Date.now().toString(36)),
+  },
   build: {
     target: 'esnext',
     rollupOptions: {
