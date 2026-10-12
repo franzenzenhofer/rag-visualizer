@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "deploy": "npm run typecheck && npm run lint && npm run test && npm run build && npx wrangler pages deploy dist --project-name=rag-visualizer --branch=main"
   },
   "dependencies": {
     "@react-spring/web": "^10.0.3",
@@ -49,6 +51,7 @@
     "tailwindcss": "^4.1.18",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "vitest": "^3.2.7"
   }
 }

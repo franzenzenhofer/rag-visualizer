@@ -27,6 +27,12 @@ import { CHUNK_COLORS } from '../types'
 // Minimum chunk size to prevent tiny fragments (50 chars ≈ 12 tokens)
 const MIN_CHUNK_CHARS = 50
 
+// Share of the target size searched backwards for a clean break point
+const BREAK_SEARCH_SHARE = 0.2
+
+// Minimum step as share of the chunk size, prevents near-duplicate chunks
+const MIN_STEP_SHARE = 0.1
+
 // Token estimation: roughly 4 characters per token (English average)
 function estimateTokens(text: string): number {
   return Math.ceil(text.length / 4)
@@ -36,90 +42,83 @@ function estimateCharacters(tokens: number): number {
   return tokens * 4
 }
 
+function isWhitespace(char: string | undefined): boolean {
+  return char === ' ' || char === '\n' || char === '\t' || char === '\r'
+}
+
+function isSentenceEnd(text: string, i: number): boolean {
+  const char = text[i]
+  const isPunctuation = char === '.' || char === '!' || char === '?'
+  // Must be followed by whitespace or the end (not "Dr." or "3.14")
+  return isPunctuation && (i + 1 >= text.length || isWhitespace(text[i + 1]))
+}
+
+// Prefer a sentence boundary, then a word boundary, else cut at the target end
+function findChunkEnd(text: string, start: number, chunkChars: number): number {
+  const end = Math.min(start + chunkChars, text.length)
+  if (end >= text.length) return text.length
+
+  const searchStart = start + Math.floor(chunkChars * (1 - BREAK_SEARCH_SHARE))
+  for (let i = end; i >= searchStart; i--) {
+    if (isSentenceEnd(text, i)) return i + 1
+  }
+  for (let i = end; i >= searchStart; i--) {
+    if (isWhitespace(text[i])) return i + 1
+  }
+  return end
+}
+
+// Move a position forward to the start of the next word; a partial word is
+// only skipped up to wordLimit so no text between chunks is ever lost
+function snapToWordStart(text: string, position: number, wordLimit: number): number {
+  let i = position
+  // Mid-word means both neighbours are non-whitespace
+  while (i > 0 && i < wordLimit && !isWhitespace(text[i - 1]) && !isWhitespace(text[i])) i++
+  while (i < text.length && isWhitespace(text[i])) i++
+  return i
+}
+
+// Next chunk starts (chunk size - overlap) after this one, at a word start
+function nextChunkStart(text: string, start: number, end: number, overlap: number): number {
+  const size = end - start
+  const step = size - Math.floor(size * (overlap / 100))
+  const minStep = Math.max(Math.ceil(size * MIN_STEP_SHARE), 1)
+  return snapToWordStart(text, start + Math.max(step, minStep), end)
+}
+
+function createChunk(text: string, start: number, end: number, index: number): Chunk {
+  const chunkText = text.slice(start, end).trim()
+  return {
+    id: `chunk-${index}`,
+    text: chunkText,
+    start,
+    end,
+    tokenCount: estimateTokens(chunkText),
+    color: CHUNK_COLORS[index % CHUNK_COLORS.length],
+  }
+}
+
 export function chunkDocument(text: string, config: ChunkingConfig): Chunk[] {
   const { chunkSize, overlap } = config
-  const chunks: Chunk[] = []
-
-  // Convert token-based size to characters (500 tokens → ~2000 chars)
   const chunkChars = estimateCharacters(chunkSize)
-
-  let start = 0
-  let chunkIndex = 0
+  const chunks: Chunk[] = []
+  let start = snapToWordStart(text, 0, text.length)
 
   while (start < text.length) {
-    // STEP 1: Calculate target end position
-    let end = Math.min(start + chunkChars, text.length)
+    const end = findChunkEnd(text, start, chunkChars)
+    const chunk = createChunk(text, start, end, chunks.length)
+    const previous = chunks.at(-1)
 
-    // STEP 2: Find best break point (only if not at document end)
-    if (end < text.length) {
-      // Search for sentence boundary in last 20% of chunk
-      const searchStart = Math.max(start + Math.floor(chunkChars * 0.8), start)
-      let breakPoint = -1
-
-      // Prefer sentence boundaries (., !, ?)
-      for (let i = end; i >= searchStart; i--) {
-        const char = text[i]
-        if (char === '.' || char === '!' || char === '?') {
-          // Ensure punctuation is followed by space/newline (not "Dr." or "3.14")
-          if (i + 1 >= text.length || text[i + 1] === ' ' || text[i + 1] === '\n') {
-            breakPoint = i + 1
-            break
-          }
-        }
-      }
-
-      // Fall back to word boundary if no sentence boundary found
-      if (breakPoint === -1) {
-        for (let i = end; i >= searchStart; i--) {
-          if (text[i] === ' ' || text[i] === '\n') {
-            breakPoint = i + 1
-            break
-          }
-        }
-      }
-
-      if (breakPoint > start) {
-        end = breakPoint
-      }
+    // A too-small final piece is merged into the previous chunk's range
+    if (end >= text.length && chunk.text.length < MIN_CHUNK_CHARS && previous) {
+      chunks[chunks.length - 1] = createChunk(text, previous.start, end, chunks.length - 1)
+    } else if (chunk.text.length > 0) {
+      chunks.push(chunk)
     }
 
-    // STEP 3: Create the chunk
-    const chunkText = text.slice(start, end).trim()
-
-    // Only create chunk if it meets minimum size (prevents tiny fragments)
-    // Exception: if this is all remaining text, include it regardless
-    const isLastChunk = end >= text.length
-    const meetsMinSize = chunkText.length >= MIN_CHUNK_CHARS
-
-    if (chunkText.length > 0 && (meetsMinSize || isLastChunk)) {
-      // If last chunk is too small, merge with previous chunk
-      if (isLastChunk && !meetsMinSize && chunks.length > 0) {
-        const prevChunk = chunks[chunks.length - 1]
-        prevChunk.text = prevChunk.text + ' ' + chunkText
-        prevChunk.end = end
-        prevChunk.tokenCount = estimateTokens(prevChunk.text)
-      } else {
-        chunks.push({
-          id: `chunk-${chunkIndex}`,
-          text: chunkText,
-          start,
-          end,
-          tokenCount: estimateTokens(chunkText),
-          color: CHUNK_COLORS[chunkIndex % CHUNK_COLORS.length],
-        })
-        chunkIndex++
-      }
-    }
-
-    // STEP 4: Calculate step forward (accounting for overlap)
-    // Overlap is percentage of ACTUAL chunk size, not target size
-    const actualChunkSize = end - start
-    const effectiveOverlapChars = Math.floor(actualChunkSize * (overlap / 100))
-    const step = actualChunkSize - effectiveOverlapChars
-
-    // Minimum step prevents near-duplicate chunks
-    const minStep = Math.max(Math.ceil(actualChunkSize * 0.1), 1)
-    start = start + Math.max(step, minStep)
+    // The chunk that reaches the document end is the last one
+    if (end >= text.length) break
+    start = nextChunkStart(text, start, end, overlap)
   }
 
   return chunks
