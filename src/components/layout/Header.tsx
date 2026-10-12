@@ -9,7 +9,7 @@ export function Header() {
   const [showPrivacyInfo, setShowPrivacyInfo] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200">
+    <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <motion.div
           className="flex items-center gap-3"

@@ -27,7 +27,7 @@ export function ChunkingExplanation() {
           <ChevronDown className="w-5 h-5 text-blue-600" />
         )}
       </button>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {showExplanation && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}

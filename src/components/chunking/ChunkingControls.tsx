@@ -7,7 +7,7 @@ export function ChunkingControls({ open }: { open: boolean }) {
   const { chunkingConfig, setChunkingConfig } = useRAGStore()
 
   return (
-    <AnimatePresence>
+    <AnimatePresence initial={false}>
       {open && (
         <motion.div
           initial={{ height: 0, opacity: 0 }}

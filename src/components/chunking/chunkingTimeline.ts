@@ -20,7 +20,8 @@ export interface PhaseDurations {
   fly: number
 }
 
-export const READING_MS = 1800
+// Long enough to scroll the panels into view and take in the whole document
+export const READING_MS = 2200
 
 const FIRST_CHUNK_MS: PhaseDurations = { scan: 2000, cut: 700, fly: 1000 }
 const REDUCED_MOTION_MS: PhaseDurations = { scan: 0, cut: 250, fly: 0 }

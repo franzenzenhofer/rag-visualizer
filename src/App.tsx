@@ -123,11 +123,12 @@ function AppContent() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <Header />
-
-      {/* Sticky step indicator */}
-      <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
-        <StepIndicator />
+      {/* Header and step indicator stick together, so the steps stay visible */}
+      <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm shadow-sm">
+        <Header />
+        <div className="border-b border-gray-200">
+          <StepIndicator />
+        </div>
       </div>
 
       {/* Main content - extra padding at bottom for floating nav */}

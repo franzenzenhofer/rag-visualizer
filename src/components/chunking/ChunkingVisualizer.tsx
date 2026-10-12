@@ -22,6 +22,9 @@ const CHUNK_PHASES: ChunkPhase[] = ['scanning', 'cutting', 'flying']
 // The sweep starts a quarter down the document panel, so the whole chunk fits below it
 const SCROLL_ANCHOR_SHARE = 0.25
 
+// Both panels fit on screen together: below the sticky step bar, above the floating nav
+const PANEL_HEIGHT = 'h-[clamp(16rem,calc(100dvh-16rem),26rem)]'
+
 function useStatusText(state: ChunkAnimationState, total: number, tokens: number): string {
   const { t } = useTranslation()
   const current = state.index + 1
@@ -87,9 +90,9 @@ export function ChunkingVisualizer() {
   const active = useMemo(() => toActiveRange(activeChunk, state), [activeChunk, state])
   const isPlaying = state.phase !== 'idle' && state.phase !== 'done'
 
-  // Make sure the document and the chunk list are on screen when the story starts
+  // Scroll the page down to the document and the chunk list before the story starts
   useEffect(() => {
-    if (state.phase === 'reading') stageRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+    if (state.phase === 'reading') stageRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' })
   }, [state.phase])
 
   // Follow the sweep: put the start of each new chunk near the top of the document panel
@@ -151,7 +154,7 @@ export function ChunkingVisualizer() {
       <ChunkingControls open={showControls} />
       <ChunkingExplanation />
 
-      <div ref={stageRef} className="grid grid-cols-2 gap-4 scroll-mt-24">
+      <div ref={stageRef} className="grid grid-cols-2 gap-4 scroll-mt-36">
         <div className="flex flex-col">
           <div className="text-base font-semibold text-gray-500 mb-2 flex items-center gap-2">
             📄 {t('steps.chunking.originalDoc')}
@@ -161,7 +164,7 @@ export function ChunkingVisualizer() {
           </div>
           <div
             ref={leftPanelRef}
-            className="h-96 bg-white dark:bg-gray-900 rounded-xl border-2 border-gray-200 dark:border-gray-700 overflow-y-auto p-4"
+            className={`${PANEL_HEIGHT} bg-white dark:bg-gray-900 rounded-xl border-2 border-gray-200 dark:border-gray-700 overflow-y-auto p-4`}
           >
             <SourceDocument
               content={document.content}
@@ -179,7 +182,7 @@ export function ChunkingVisualizer() {
           </div>
           <div
             ref={rightPanelRef}
-            className="h-96 bg-gray-50 dark:bg-gray-800 rounded-xl border-2 border-gray-200 dark:border-gray-700 overflow-y-auto p-4"
+            className={`${PANEL_HEIGHT} bg-gray-50 dark:bg-gray-800 rounded-xl border-2 border-gray-200 dark:border-gray-700 overflow-y-auto p-4`}
           >
             <ChunksPanel placedChunks={placedChunks} incomingChunk={incomingChunk} slotRef={slotRef} />
           </div>
